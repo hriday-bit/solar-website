@@ -1,0 +1,65 @@
+Build a modern, professional, fully responsive business website for a solar panel and battery dealership. Use HTML5, Tailwind CSS (via CDN), vanilla JavaScript, the AOS (Animate On Scroll) library for scroll animations, and Lucide or Font Awesome icons. Google Fonts via CDN. Mobile-first, fully responsive across phone/tablet/desktop.
+
+BUSINESS DETAILS (use exactly as given):
+- Business Name: RISHABH ENTERPRISES UTL SOLAR
+- Category: Authorized dealer of solar panels, solar batteries, inverters/PCUs, and solar charge controllers
+- Phone: 09873403889 (create a proper tel: link as +919873403889)
+- WhatsApp: same number, create a wa.me click-to-chat link with a prefilled message like "Hi, I'm interested in solar panels/batteries"
+- Address: In front of Vishal Mega Mart and Petrol Pump, Railway Road, Dadri, Uttar Pradesh 203207
+- Reputation: 5-star rated business — highlight this prominently with a star-rating badge
+
+COLOR PALETTE (solar/renewable energy theme):
+- Primary: Solar amber/orange (#FF8A00 / #F5A623) — sun, energy, CTAs
+- Secondary: Deep navy blue (#0B3D91 / #14213D) — sky, trust, headers/footer
+- Accent: Fresh green (#27AE60) — renewable/eco highlights, success states
+- Neutrals: Off-white background (#F9FAFB), charcoal text (#1F2937)
+- Hero section: navy-to-orange gradient background suggesting a sunrise
+
+TYPOGRAPHY:
+- Headings: Poppins (bold, geometric, modern — feels energetic and technical)
+- Body text: Inter or Open Sans (clean, highly readable)
+- Load both from Google Fonts
+
+SECTIONS (single-page scrolling site with anchor navigation):
+
+1. Navbar — sticky, transparent over hero then solid white with shadow on scroll. Logo + "RISHABH ENTERPRISES UTL SOLAR" wordmark. Links: Home, About, Products, Why Us, Reviews, Gallery, Contact. A highlighted "Call Now" button. Mobile hamburger menu with slide-in drawer.
+
+2. Hero — full-width section, gradient background with a subtle sun icon/rays. Animated headline (fade/slide in), e.g. "Powering Homes with Clean Solar Energy" and a subheading. Two CTA buttons: "Call Now" and "Get Free Quote" (scrolls to contact). Include a small 5-star badge with "5.0 Rated" near the CTAs.
+
+3. About Us — short intro to the business as a trusted local solar dealer. Animated count-up stats on scroll (e.g. Years in Business, Happy Customers, Installations Done, Customer Rating).
+
+4. Products — card grid, each card with an icon/image, hover lift + shadow animation:
+   - Solar Panels (Mono/Poly)
+   - Solar Batteries (Tubular/Lithium)
+   - Solar Inverters / PCUs
+   - Solar Charge Controllers
+   - Complete Solar Systems (On-grid / Off-grid / Hybrid)
+   Each card has an "Enquire Now" button linking to WhatsApp or the contact section.
+
+5. Why Choose Us — icon feature grid: Genuine Products, Expert Installation, After-Sales Service & Warranty, Affordable Pricing/EMI Options, Trusted Local Dealer. Fade-up animation per card on scroll.
+
+6. Reviews — prominent 5-star rating display, styled like Google review cards (name, stars, short quote placeholders). Optional horizontal scroll/carousel.
+
+7. Gallery — responsive image grid of solar installations (use relevant stock placeholder images for now) with a subtle zoom-on-hover effect.
+
+8. Contact — two-column layout: a simple contact form (Name, Phone, Message — no backend needed yet) on one side, and an embedded Google Map pinned to the address above plus the phone number and address as text on the other side.
+
+9. Footer — dark navy background, business name, address, phone, quick nav links, and social icons. Copyright line at the bottom.
+
+ANIMATIONS & EFFECTS:
+- AOS fade-up/zoom-in animations triggered as each section scrolls into view
+- Hover scale + shadow transitions on all cards and buttons
+- Animated number count-up for the stats in the About section
+- Smooth scrolling for all anchor links
+- Navbar shrinks and gains a shadow on scroll
+- Floating WhatsApp button, bottom-right, with a subtle pulse animation
+- Gentle button hover glow/ripple effect
+
+FUNCTIONAL REQUIREMENTS:
+- Fully responsive, mobile-first
+- Working click-to-call and click-to-WhatsApp links using the number above
+- Embedded Google Map for the address above
+- SEO meta tags (title, description, OG tags) targeting terms like "solar panel dealer Dadri", "UTL Solar Dadri", "solar battery Uttar Pradesh"
+- Optimized images with alt text, good color contrast, and accessible markup
+
+Build the entire site in one go — all sections fully coded, styled, animated, and responsive — using the business details exactly as provided above.

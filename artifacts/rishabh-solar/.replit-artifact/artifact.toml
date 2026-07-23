@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "Rishabh Enterprises UTL Solar"
+version = "1.0.0"
+id = "artifacts/rishabh-solar"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23652
+
+[services.development]
+run = "pnpm --filter @workspace/rishabh-solar run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/rishabh-solar", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/rishabh-solar/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23652"
+BASE_PATH = "/"
