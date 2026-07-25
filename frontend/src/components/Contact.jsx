@@ -16,6 +16,15 @@ export default function Contact() {
     e.preventDefault();
     setStatus('loading');
     setFeedback('');
+
+    // Phone number validation (must have at least 10 digits)
+    const digitsOnly = form.phone.replace(/\D/g, '');
+    if (digitsOnly.length < 10) {
+      setStatus('error');
+      setFeedback('Please enter a valid 10-digit phone number.');
+      return;
+    }
+
     try {
       const res = await fetch(`${API_BASE}/api/contact`, {
         method: 'POST',
