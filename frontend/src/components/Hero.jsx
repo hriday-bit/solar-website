@@ -129,20 +129,6 @@ export default function Hero() {
   return (
     <section id="hero" ref={wrapRef} style={{ position: 'relative', height: '400vh', backgroundColor: '#14213D' }}>
       
-      {/* Loading Overlay */}
-      {loadedPercent < 99 && (
-        <div style={{
-          position: 'fixed', inset: 0, zIndex: 9999, background: '#14213D',
-          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
-        }}>
-          <h2 style={{ color: '#fff', fontFamily: 'Poppins', marginBottom: '1rem', letterSpacing: '2px' }}>LOADING EXPERIENCE</h2>
-          <div style={{ width: '250px', height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', overflow: 'hidden' }}>
-            <div style={{ width: `${loadedPercent}%`, height: '100%', background: '#FF8A00', transition: 'width 0.2s' }}></div>
-          </div>
-          <p style={{ color: 'rgba(255,255,255,0.5)', marginTop: '1rem', fontSize: '0.9rem' }}>{loadedPercent}%</p>
-        </div>
-      )}
-
       {/* Sticky Canvas Container */}
       <div style={{ position: 'sticky', top: 0, height: '100vh', width: '100%', overflow: 'hidden' }}>
         <canvas ref={canvasRef} style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }} />
