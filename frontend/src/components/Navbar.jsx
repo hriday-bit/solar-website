@@ -74,7 +74,7 @@ export default function Navbar() {
   return (
     <>
       <nav className={`navbar ${scrolled ? 'scrolled' : 'top'}`}>
-        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div className="navbar-inner container">
           {/* Logo + Name */}
           <a href="#hero" onClick={e => handleNavClick(e, 'hero')} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none' }}>
             <div style={{

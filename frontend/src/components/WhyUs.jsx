@@ -71,10 +71,10 @@ export default function WhyUs() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-          style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem' }}
+          className="why-grid"
         >
           {WHY_US_ITEMS.map(item => (
-            <motion.div key={item.title} variants={cardVariants}>
+            <motion.div key={item.title} variants={cardVariants} style={{ height: '100%' }}>
               <div className="why-card">
                 <div className="why-icon-wrap" style={{ fontSize: '1.8rem' }}>
                   {item.icon}

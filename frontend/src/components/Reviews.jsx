@@ -86,16 +86,16 @@ export default function Reviews() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
-            style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}
+            className="reviews-grid"
           >
             {reviews.map(review => (
-              <motion.div key={review.id} variants={cardVariants}>
+              <motion.div key={review.id} variants={cardVariants} style={{ height: '100%' }}>
                 <div className="review-card">
                   <StarRating rating={review.rating} />
-                  <p style={{ color: 'var(--text-charcoal)', fontSize: '0.95rem', lineHeight: 1.7, margin: '1rem 0', fontStyle: 'italic' }}>
+                  <p className="review-card-quote">
                     "{review.quote}"
                   </p>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', borderTop: '1px solid #F3F4F6', paddingTop: '1rem' }}>
+                  <div className="review-card-author">
                     <div style={{
                       width: '42px', height: '42px', borderRadius: '50%',
                       background: 'linear-gradient(135deg, var(--navy-deep), var(--solar-amber))',

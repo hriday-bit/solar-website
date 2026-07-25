@@ -49,12 +49,9 @@ export default function AdminDashboard() {
       </div>
 
       {/* Overview Cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1.25rem', marginBottom: '2.5rem' }}>
+      <div className="admin-stats-grid">
         {overviewCards.map(card => (
-          <div key={card.label} style={{
-            background: '#fff', borderRadius: '16px', padding: '1.5rem',
-            boxShadow: '0 2px 16px rgba(0,0,0,0.06)', border: '1px solid #F3F4F6',
-          }}>
+          <div key={card.label} className="admin-stat-card">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
               <div>
                 <p style={{ color: '#6B7280', fontSize: '0.8rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '0.5rem' }}>
@@ -72,7 +69,7 @@ export default function AdminDashboard() {
         ))}
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+      <div className="admin-secondary-grid">
         {/* Lead Status Pipeline */}
         <div style={{ background: '#fff', borderRadius: '16px', padding: '1.75rem', boxShadow: '0 2px 16px rgba(0,0,0,0.06)', border: '1px solid #F3F4F6' }}>
           <h3 style={{ fontFamily: 'Poppins', fontWeight: 700, fontSize: '1rem', color: '#14213D', marginBottom: '1.25rem' }}>

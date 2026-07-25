@@ -121,13 +121,11 @@ export default function AdminProducts() {
       ) : (
         <div style={{ background: '#fff', borderRadius: '16px', boxShadow: '0 2px 16px rgba(0,0,0,0.06)', border: '1px solid #F3F4F6', overflow: 'hidden' }}>
           <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <table className="admin-table">
               <thead>
                 <tr style={{ background: '#F9FAFB', borderBottom: '1px solid #E5E7EB' }}>
                   {['Product', 'Category', 'Price', 'In Stock', 'Featured', 'Likes', 'Actions'].map(h => (
-                    <th key={h} style={{ padding: '0.85rem 1rem', textAlign: 'left', fontFamily: 'Poppins', fontWeight: 700, fontSize: '0.78rem', color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>
-                      {h}
-                    </th>
+                    <th key={h}>{h}</th>
                   ))}
                 </tr>
               </thead>
@@ -193,8 +191,8 @@ export default function AdminProducts() {
                 { label: 'Image URL (optional)', name: 'image_url', type: 'url', placeholder: 'https://...' },
                 { label: 'Icon Key (optional)', name: 'icon_key', type: 'text', placeholder: 'e.g. solar_panel_mono' },
               ].map(field => (
-                <div key={field.name} style={{ marginBottom: '1rem' }}>
-                  <label style={{ display: 'block', fontFamily: 'Poppins', fontWeight: 600, fontSize: '0.82rem', color: '#1F2937', marginBottom: '0.35rem' }}>{field.label}</label>
+                <div key={field.name} className="admin-form-group">
+                  <label className="admin-form-label">{field.label}</label>
                   <input type={field.type} required={field.required} placeholder={field.placeholder}
                     value={form[field.name]} onChange={e => setForm({ ...form, [field.name]: e.target.value })}
                     className="contact-input" style={{ fontSize: '0.9rem' }} />

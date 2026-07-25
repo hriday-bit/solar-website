@@ -15,6 +15,13 @@
   --card-bg: #FFFFFF;
   --shadow-card: 0 4px 24px rgba(11, 61, 145, 0.10);
   --shadow-hover: 0 12px 40px rgba(255, 138, 0, 0.22);
+
+  /* Spacing tokens */
+  --section-pad-v: 5rem;
+  --section-header-mb: 3.5rem;
+  --card-pad: 2rem 1.5rem;
+  --card-radius: 20px;
+  --grid-gap: 1.75rem;
 }
 
 /* ===== Base Reset ===== */
@@ -62,6 +69,12 @@ img {
   padding: 0 1.5rem;
 }
 
+/* ===== Section Headers (consistent across ALL sections) ===== */
+.section-header {
+  text-align: center;
+  margin-bottom: var(--section-header-mb);
+}
+
 .section-heading {
   font-family: 'Poppins', sans-serif;
   font-size: clamp(1.8rem, 4vw, 2.8rem);
@@ -78,32 +91,55 @@ img {
   height: 5px;
   background: linear-gradient(90deg, var(--solar-amber), var(--solar-orange));
   border-radius: 3px;
-  margin-top: 10px;
+  margin: 10px auto 0;
 }
 
 .section-subtext {
   color: var(--text-muted);
   font-size: 1.05rem;
   max-width: 600px;
+  margin: 1.25rem auto 0;
+  text-align: center;
 }
 
-/* ===== Buttons ===== */
+/* ===== Section Labels ===== */
+.section-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: var(--solar-amber);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+}
+
+/* ===== Buttons — unified height + padding across the entire site ===== */
 .btn-primary {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   background: linear-gradient(135deg, var(--solar-amber) 0%, #e67e00 100%);
   color: #ffffff;
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
   font-size: 0.95rem;
+  /* Fixed height via consistent padding */
   padding: 0.75rem 1.75rem;
+  min-height: 46px;
   border-radius: 50px;
   border: none;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0 4px 16px rgba(255, 138, 0, 0.35);
   white-space: nowrap;
+  line-height: 1;
+  text-decoration: none;
+  vertical-align: middle;
 }
 
 .btn-primary:hover {
@@ -114,19 +150,24 @@ img {
 .btn-secondary {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   background: transparent;
   color: #ffffff;
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
   font-size: 0.95rem;
-  padding: 0.72rem 1.7rem;
+  padding: 0.75rem 1.75rem;
+  min-height: 46px;
   border-radius: 50px;
   border: 2px solid rgba(255, 255, 255, 0.7);
   cursor: pointer;
   transition: all 0.2s ease;
   backdrop-filter: blur(4px);
   white-space: nowrap;
+  line-height: 1;
+  text-decoration: none;
+  vertical-align: middle;
 }
 
 .btn-secondary:hover {
@@ -138,17 +179,23 @@ img {
 .btn-outline {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   background: transparent;
   color: var(--solar-amber);
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
   font-size: 0.9rem;
-  padding: 0.65rem 1.5rem;
+  padding: 0.75rem 1.5rem;
+  min-height: 46px;
   border-radius: 50px;
   border: 2px solid var(--solar-amber);
   cursor: pointer;
   transition: all 0.2s ease;
+  white-space: nowrap;
+  line-height: 1;
+  text-decoration: none;
+  vertical-align: middle;
 }
 
 .btn-outline:hover {
@@ -160,7 +207,7 @@ img {
 /* ===== Cards ===== */
 .card {
   background: var(--card-bg);
-  border-radius: 20px;
+  border-radius: var(--card-radius);
   box-shadow: var(--shadow-card);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -170,9 +217,9 @@ img {
   box-shadow: var(--shadow-hover);
 }
 
-/* ===== Section Padding ===== */
+/* ===== Section Padding — consistent across all sections ===== */
 .section-pad {
-  padding: 5rem 0;
+  padding: var(--section-pad-v) 0;
 }
 
 /* ===== Star Rating ===== */
@@ -233,18 +280,46 @@ img {
   right: 0;
   z-index: 1000;
   transition: all 0.35s ease;
-  padding: 1.1rem 0;
+  padding: 1rem 0;
 }
 
 .navbar.scrolled {
   background: rgba(11, 61, 145, 0.97);
   backdrop-filter: blur(12px);
-  padding: 0.7rem 0;
+  padding: 0.65rem 0;
   box-shadow: 0 4px 30px rgba(0,0,0,0.25);
 }
 
 .navbar.top {
   background: transparent;
+}
+
+/* Navbar inner row — logo + links + button all vertically centred */
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  list-style: none;
+}
+
+.desktop-nav li {
+  display: flex;
+  align-items: center;
 }
 
 /* ===== Mobile Drawer ===== */
@@ -314,17 +389,25 @@ img {
   transform: translateY(-6px);
 }
 
-/* ===== Product Cards ===== */
+/* ===== Product Cards — equal height via grid stretch ===== */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: var(--grid-gap);
+  align-items: stretch;      /* equal-height columns */
+}
+
 .product-card {
   background: #ffffff;
-  border-radius: 20px;
+  border-radius: var(--card-radius);
   padding: 2rem 1.5rem;
   box-shadow: 0 4px 24px rgba(11, 61, 145, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 100%;              /* fill the grid cell */
   border: 1px solid rgba(11,61,145,0.06);
+  position: relative;
 }
 
 .product-card:hover {
@@ -343,6 +426,7 @@ img {
   justify-content: center;
   margin-bottom: 1.25rem;
   font-size: 2rem;
+  flex-shrink: 0;
 }
 
 .category-badge {
@@ -359,15 +443,64 @@ img {
   border: 1px solid rgba(255,138,0,0.2);
 }
 
-/* ===== Review Cards ===== */
+/* ===== Why Us Cards — equal height ===== */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.why-card {
+  background: #ffffff;
+  border-radius: var(--card-radius);
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(11,61,145,0.07);
+  border: 1px solid rgba(11,61,145,0.06);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+}
+
+.why-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(255,138,0,0.15);
+  border-color: rgba(255,138,0,0.2);
+}
+
+.why-icon-wrap {
+  width: 60px;
+  height: 60px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #EBF5FB, #D6EAF8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+/* ===== Review Cards — equal height ===== */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
 .review-card {
   background: #ffffff;
-  border-radius: 20px;
+  border-radius: var(--card-radius);
   padding: 2rem;
   box-shadow: 0 4px 24px rgba(11, 61, 145, 0.08);
   border: 1px solid rgba(11,61,145,0.06);
   transition: transform 0.3s ease;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .review-card::before {
@@ -380,6 +513,25 @@ img {
   opacity: 0.15;
   font-family: Georgia, serif;
   line-height: 1;
+}
+
+/* push the author row to the bottom of every card */
+.review-card-quote {
+  flex: 1;
+  color: var(--text-charcoal);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin: 1rem 0;
+  font-style: italic;
+}
+
+.review-card-author {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-top: 1px solid #F3F4F6;
+  padding-top: 1rem;
+  margin-top: auto;
 }
 
 .review-card:hover {
@@ -429,36 +581,12 @@ img {
   color: #9CA3AF;
 }
 
-/* ===== Why Us ===== */
-.why-card {
-  background: #ffffff;
-  border-radius: 20px;
-  padding: 2rem;
-  box-shadow: 0 4px 20px rgba(11,61,145,0.07);
-  border: 1px solid rgba(11,61,145,0.06);
-  transition: all 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1rem;
-}
-
-.why-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 40px rgba(255,138,0,0.15);
-  border-color: rgba(255,138,0,0.2);
-}
-
-.why-icon-wrap {
-  width: 60px;
-  height: 60px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, #EBF5FB, #D6EAF8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.8rem;
-  flex-shrink: 0;
+/* ===== Contact section layout ===== */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+  align-items: start;
 }
 
 /* ===== Footer ===== */
@@ -489,27 +617,156 @@ img {
   font-size: 0.9rem;
 }
 
-/* ===== Section Labels ===== */
-.section-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--solar-amber);
+/* ===== Admin Panel ===== */
+
+/* Admin overview cards — equal height */
+.admin-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+  align-items: stretch;
+}
+
+.admin-stat-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  border: 1px solid #F3F4F6;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* Admin secondary grid (pipeline + most liked + actions) */
+.admin-secondary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.admin-panel-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.75rem;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  border: 1px solid #F3F4F6;
+  height: 100%;
+}
+
+/* Admin table — consistent column alignment */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th {
+  padding: 0.85rem 1rem;
+  text-align: left;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  color: #6B7280;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  background: #F9FAFB;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+/* Right-align number columns */
+.admin-table th.align-right,
+.admin-table td.align-right {
+  text-align: right;
+}
+
+/* Center-align status/toggle columns */
+.admin-table th.align-center,
+.admin-table td.align-center {
+  text-align: center;
+}
+
+.admin-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid #F3F4F6;
+  vertical-align: middle;
+}
+
+/* Admin form fields — consistent label + input spacing */
+.admin-form-group {
+  margin-bottom: 1rem;
+}
+
+.admin-form-label {
+  display: block;
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 0.75rem;
+  font-size: 0.82rem;
+  color: #1F2937;
+  margin-bottom: 0.4rem;
 }
 
 /* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .desktop-nav { display: none !important; }
+  .hamburger-btn { display: flex !important; }
+}
+
 @media (max-width: 768px) {
-  .section-pad {
-    padding: 3.5rem 0;
+  :root {
+    --section-pad-v: 3.5rem;
+    --section-header-mb: 2.5rem;
+    --grid-gap: 1.25rem;
   }
 
   .hero-section {
     min-height: 100svh;
+  }
+
+  /* Stack contact form + map cleanly on mobile */
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Prevent sidebar from hiding on narrow screens in admin */
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  /* Admin overview cards — 2 columns on tablet */
+  .admin-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --section-pad-v: 2.75rem;
+    --section-header-mb: 2rem;
+  }
+
+  /* Full-width single column on mobile */
+  .products-grid,
+  .why-grid,
+  .reviews-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Buttons fill width on very small screens */
+  .btn-group-mobile {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-group-mobile .btn-primary,
+  .btn-group-mobile .btn-secondary {
+    width: 100%;
   }
 }

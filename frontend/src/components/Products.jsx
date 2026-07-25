@@ -32,7 +32,7 @@ function ProductCard({ product }) {
   };
 
   return (
-    <motion.div variants={cardVariants} style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+    <motion.div variants={cardVariants} style={{ height: '100%' }}>
       <div className="product-card" style={{ position: 'relative' }}>
         {/* Best Seller Badge */}
         {product.is_featured && (
@@ -121,7 +121,7 @@ export default function Products() {
 
         {!loading && !error && (
           <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }}
-            style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(290px, 1fr))', gap: '1.75rem' }}>
+            className="products-grid">
             {products.map(product => <ProductCard key={product.id} product={product} />)}
           </motion.div>
         )}
