@@ -127,7 +127,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="hero" ref={wrapRef} style={{ position: 'relative', height: '400vh', backgroundColor: '#14213D' }}>
+    <section id="hero" ref={wrapRef} style={{ position: 'relative', height: '250vh', backgroundColor: '#14213D' }}>
       
       {/* Sticky Canvas Container */}
       <div style={{ position: 'sticky', top: 0, height: '100vh', width: '100%', overflow: 'hidden' }}>
