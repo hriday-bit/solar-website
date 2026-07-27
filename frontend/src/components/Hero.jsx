@@ -137,7 +137,7 @@ export default function Hero() {
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(20,33,61,0.85) 0%, rgba(20,33,61,0.4) 50%, transparent 100%)', pointerEvents: 'none' }} />
 
         {/* Hero Content Overlay */}
-        <div className="container" style={{ position: 'absolute', inset: 0, zIndex: 10, display: 'flex', alignItems: 'center', padding: '0 1.5rem' }}>
+        <div className="container" style={{ position: 'absolute', inset: 0, zIndex: 10, display: 'flex', alignItems: 'center', padding: '0 1.5rem', paddingTop: 'clamp(5rem, 18vw, 2rem)' }}>
           <div style={{ maxWidth: '760px' }}>
             {/* 5-star badge */}
             <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0}>
