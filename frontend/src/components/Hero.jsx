@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 const fadeUp = {
@@ -9,55 +9,58 @@ const fadeUp = {
 export default function Hero() {
   const canvasRef = useRef(null);
   const wrapRef = useRef(null);
-  const [loadedPercent, setLoadedPercent] = useState(0);
-
-  // Failsafe: Never show the loading screen for more than 4 seconds, even on slow connections
-  useEffect(() => {
-    const timer = setTimeout(() => setLoadedPercent(100), 4000);
-    return () => clearTimeout(timer);
-  }, []);
 
   useEffect(() => {
     const TOTAL = 300;
     const FOLDER = '/frames';
-    const srcs = Array.from({ length: TOTAL }, (_, i) =>
-      `${FOLDER}/frame_${String(i + 1).padStart(6, '0')}.jpg`
-    );
 
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d', { alpha: false });
     const animWrap = wrapRef.current;
 
-    const imgs = new Array(TOTAL).fill(null);
-    let loaded = 0;
-    let curIdx = -1;
+    // Cache of loaded images — only loaded on demand
+    const cache = {};
+    const loading = {};
+
+    let curDrawn = -1;
     let targIdx = 0;
     let dispIdx = 0;
     let rafId = null;
 
+    function src(i) {
+      return `${FOLDER}/frame_${String(i + 1).padStart(6, '0')}.jpg`;
+    }
+
+    function loadFrame(i) {
+      if (cache[i] || loading[i]) return;
+      loading[i] = true;
+      const img = new Image();
+      img.onload = () => { cache[i] = img; delete loading[i]; };
+      img.onerror = () => { delete loading[i]; };
+      img.src = src(i);
+    }
+
     function resize() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      redraw(true);
+      draw(Math.round(dispIdx), true);
     }
     window.addEventListener('resize', resize, { passive: true });
     resize();
 
-    function redraw(force) {
-      let idx = Math.max(0, Math.min(TOTAL - 1, Math.round(dispIdx)));
-      let img = imgs[idx];
+    function draw(idx, force) {
+      if (idx === curDrawn && !force) return;
+      let img = cache[idx];
+      // Fallback: find nearest loaded frame
       if (!img) {
-        for (let d = 1; d < TOTAL; d++) {
-          if (idx - d >= 0 && imgs[idx - d]) { img = imgs[idx - d]; break; }
-          if (idx + d < TOTAL && imgs[idx + d]) { img = imgs[idx + d]; break; }
+        for (let d = 1; d < 30; d++) {
+          if (cache[idx - d]) { img = cache[idx - d]; break; }
+          if (cache[idx + d]) { img = cache[idx + d]; break; }
         }
       }
       if (!img) return;
-      const di = imgs.indexOf(img);
-      if (di === curIdx && !force) return;
-      curIdx = di;
-      
+      curDrawn = idx;
       const cw = canvas.width, ch = canvas.height;
       const iw = img.naturalWidth, ih = img.naturalHeight;
       const s = Math.max(cw / iw, ch / ih);
@@ -67,7 +70,14 @@ export default function Hero() {
     function tick() {
       rafId = requestAnimationFrame(tick);
       dispIdx += (targIdx - dispIdx) * 0.18;
-      redraw(false);
+      const idx = Math.max(0, Math.min(TOTAL - 1, Math.round(dispIdx)));
+      draw(idx, false);
+
+      // Preload current frame + 10 frames ahead + 5 behind only
+      for (let d = -5; d <= 10; d++) {
+        const f = idx + d;
+        if (f >= 0 && f < TOTAL) loadFrame(f);
+      }
     }
 
     const onScroll = () => {
@@ -80,59 +90,31 @@ export default function Hero() {
     };
     window.addEventListener('scroll', onScroll, { passive: true });
 
-    function loadOne(src, idx) {
-      return new Promise(resolve => {
-        const img = new Image();
-        img.onload = () => {
-          imgs[idx] = img;
-          loaded++;
-          setLoadedPercent(Math.floor((loaded / TOTAL) * 100));
-          resolve();
-        };
-        img.onerror = () => {
-          // If an image fails to load, still count it as "processed" so we don't block the UI
-          loaded++;
-          setLoadedPercent(Math.floor((loaded / TOTAL) * 100));
-          resolve();
-        };
-        img.src = src;
-      });
-    }
-
-    async function loadAll() {
-      await loadOne(srcs[0], 0);
-      redraw(true);
-      rafId = requestAnimationFrame(tick);
-      
-      const intervals = [149, 299, 74, 224, 37, 112, 187, 262];
-      await Promise.all(intervals.map(i => loadOne(srcs[i], i)));
-      
-      const rem = [];
-      for(let i=1; i<TOTAL; i++) {
-        if(!imgs[i]) rem.push(i);
+    // Load only first frame immediately, then start the loop
+    loadFrame(0);
+    const waitFirst = setInterval(() => {
+      if (cache[0]) {
+        clearInterval(waitFirst);
+        draw(0, true);
+        rafId = requestAnimationFrame(tick);
       }
-      
-      for(let i=0; i<rem.length; i+=10) {
-        const batch = rem.slice(i, i+10);
-        await Promise.all(batch.map(idx => loadOne(srcs[idx], idx)));
-      }
-    }
-    loadAll();
+    }, 50);
 
     return () => {
       window.removeEventListener('resize', resize);
       window.removeEventListener('scroll', onScroll);
+      clearInterval(waitFirst);
       if (rafId) cancelAnimationFrame(rafId);
     };
   }, []);
 
   return (
     <section id="hero" ref={wrapRef} style={{ position: 'relative', height: '250vh', backgroundColor: '#14213D' }}>
-      
+
       {/* Sticky Canvas Container */}
       <div style={{ position: 'sticky', top: 0, height: '100vh', width: '100%', overflow: 'hidden' }}>
         <canvas ref={canvasRef} style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }} />
-        
+
         {/* Dark overlay for text readability */}
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(20,33,61,0.85) 0%, rgba(20,33,61,0.4) 50%, transparent 100%)', pointerEvents: 'none' }} />
 
